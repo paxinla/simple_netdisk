@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+    <title>Upload new File</title>
+    <link href="../static/img/favicon.ico" rel="icon" type="image/png" />
+    <link href="../static/css/style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div id="app">
+        <h2>Login</h2>
+
+        <div id="login-form">
+            <form action='login' method='POST'>
+                <div class="form-item"><input type='text' name='username' id='username' placeholder='username'/></div>
+                <div class="form-item"><input type='password' name='password' id='password' placeholder='password'/></div>
+                <div class="form-item"><input type='submit' name='submit' value="Login" /></div>
+            </form>
+        </div>
+
+        <div class="msg-box msg-err">{{ message }}</div>
+    </div>
+</body>
+</html>

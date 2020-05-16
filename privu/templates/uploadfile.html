@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+    <title>Upload new File</title>
+    <link href="../static/img/favicon.ico" rel="icon" type="image/png" />
+    <link href="../static/css/style.css" rel="stylesheet" type="text/css" />
+    <script src="../static/js/jquery.min.js"></script>
+    <script src="../static/js/custom.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h2>Upload new File</h2>
+
+        <div class="jump-btn">
+            <button class="jump-link" onclick="logout()">Logout</button>
+        </div>
+
+        <div class="myhr"></div>
+
+        <div class="load-area">
+            {% if message %}
+              {% if msgok %}
+                <div class="msg-box msg-box-spec msg-ok">{{ message }}</div>
+              {% else %}
+                <div class="msg-box msg-box-spec msg-err">{{ message }}</div>
+              {% endif %}
+            {% endif %}
+
+            <form action="" method=post enctype=multipart/form-data>
+              <p><input type=file name=file class="choose-file-box">
+                 <input type=submit value=Upload class="choose-file-btn">
+            </form>
+
+            <ul>
+                {% for c,n in files %}
+                <li class="file-item">Code=<span class="filecode"> {{ c }} </span>&nbsp;&nbsp;<span class="file-info-sep">|</span>&nbsp;&nbsp;FileName=<span class="filename"> {{ n }} </span>&nbsp;&nbsp;<span class="file-info-sep">|</span>&nbsp;&nbsp;<button class="delete-btn" onclick="delitem('{{ c }}')">Delete</button></li>
+                {% endfor %}
+            </ul>
+
+        </div>
+    </div>
+</body>
+</html>

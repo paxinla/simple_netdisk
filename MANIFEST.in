@@ -1,0 +1,4 @@
+include MANIFEST.in
+include ReadMe.md
+recursive-include privu/static *
+recursive-include privu/templates *

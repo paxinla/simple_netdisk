@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+  <title>Download File</title>
+  <link href="../static/img/favicon.ico" rel="icon" type="image/png" />
+  <link href="../static/css/style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+  <div id="app">
+     <h2>Download File</h2>
+     <div class="jump-btn"><a class="jump-link" href="/uploadfile">Upload File</a></div>
+
+     <div class="myhr"></div>
+
+     <div class="load-area">
+      <form method=post >
+        <input type=text name=filecode placeholder="Enter your file code">
+        <input type=submit value=Download>
+      </form>
+     </div>
+
+     <div class="msg-box msg-err">
+         {{ message }}
+     </div>
+
+  </div>
+</body>
+</html>

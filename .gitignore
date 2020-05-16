@@ -1,0 +1,7 @@
+*.swp
+*.pyc
+__pycache__
+ENV
+build
+dist
+privu.egg-info
