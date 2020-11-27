@@ -2,8 +2,6 @@ name: Create release wheel file
 
 on:
   push:
-    branches:
-      - master
     tags:
       - 'v*'
 
@@ -38,17 +36,6 @@ jobs:
     - name: Build whl package
       run: python setup.py bdist_wheel
 
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
-        draft: false
-        prerelease: false
-
     - name: Get Name of Artifact
       id: get_artifact_name
       run: |
@@ -56,6 +43,18 @@ jobs:
         ARTIFACT_NAME=$(basename ${ARTIFACT_PATH})
         echo "::set-output name=wheel_path::${ARTIFACT_PATH}"
         echo "::set-output name=wheel_name::${ARTIFACT_NAME}"
+        echo "::set-output name=tag::${GITHUB_REF#refs/*/}"
+
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ steps.get_artifact_name.outputs.tag }}
+        release_name: ${{ steps.get_artifact_name.outputs.tag }}
+        draft: false
+        prerelease: false
 
     - name: Upload Release Asset
       id: upload-release-asset 
@@ -65,5 +64,5 @@ jobs:
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./${{ steps.get_artifact_name.outputs.wheel_path }}
-        asset_name: ./${{ steps.get_artifact_name.outputs.wheel_name }}
+        asset_name: ${{ steps.get_artifact_name.outputs.wheel_name }}
         asset_content_type: application/zip
